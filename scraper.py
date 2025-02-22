@@ -21,8 +21,8 @@ def scrape_image(url: str) -> str:
     chrome_options.add_argument(f"user-agent={user_agent}")
 
     # Inicializar WebDriver
-    service = Service(executable_path="chromedriver-linux64\chromedriver-linux64\chromedriver")
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    #service = Service(executable_path="chromedriver-win64\chromedriver-win64\chromedriver.exe")
+    driver = webdriver.Chrome(options=chrome_options)
 
     # Abrir la página
     url = "https://www.zara.com/es/en/bear-print-sweatshirt-p02511601.html"
@@ -36,3 +36,5 @@ def scrape_image(url: str) -> str:
         print("No se encontró la imagen.")
 
     driver.quit()
+
+scrape_image("")
