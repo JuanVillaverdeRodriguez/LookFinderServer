@@ -1,10 +1,12 @@
 from fastapi import FastAPI, File, HTTPException, UploadFile, Path
 import os
 
+from fastapi.staticfiles import StaticFiles
+
 app = FastAPI()
 
 UPLOAD_FOLDER = "uploads"
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
 @app.post("/upload/")
 async def upload_image(file: UploadFile = File(...)):
