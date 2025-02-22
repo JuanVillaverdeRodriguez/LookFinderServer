@@ -4,8 +4,6 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
-
-
 def scrape_image(url: str) -> str:
     # Configurar opciones de Chrome
     chrome_options = Options()
@@ -23,7 +21,7 @@ def scrape_image(url: str) -> str:
     chrome_options.add_argument(f"user-agent={user_agent}")
 
     # Inicializar WebDriver
-    service = Service(ChromeDriverManager().install())
+    service = Service(executable_path="chromedriver-linux64\chromedriver-linux64\chromedriver")
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     # Abrir la página
