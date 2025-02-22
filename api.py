@@ -16,7 +16,7 @@ async def upload_image(file: UploadFile = File(...)):
     with open(file_location, "wb") as f:
         f.write(await file.read())
 
-    return {"url": f"https://tu-proyecto.railway.app/{file_location}"}
+    return {"url": f"https://lookfinderserver-production.up.railway.app/{file_location}"}
 
 @app.get("/") 
 def read_root():
