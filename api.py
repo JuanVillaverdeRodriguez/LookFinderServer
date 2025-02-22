@@ -1,6 +1,6 @@
 from fastapi import FastAPI, File, HTTPException, UploadFile, Path
 import os
-
+from scraper import scrape_image
 from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
@@ -21,6 +21,17 @@ async def upload_image(file: UploadFile = File(...)):
             f.write(await file.read())
 
         return {"url": f"https://lookfinderserver-production.up.railway.app/uploads/{file.filename}"}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error interno: {str(e)}")
+    
+@app.get("/fetch/")
+async def upload_image(url: str):
+    try:
+
+        image_url = scrape_image(url)
+
+        return {"image": f"{image_url}"}
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error interno: {str(e)}")
