@@ -14,3 +14,7 @@ async def upload_image(file: UploadFile = File(...)):
         f.write(await file.read())
 
     return {"url": f"https://tu-servidor.com/{file_location}"}
+
+@app.get("/") 
+def read_root():
+    return {"message": "API funcionando correctamente"}
