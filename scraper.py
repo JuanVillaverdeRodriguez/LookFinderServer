@@ -36,5 +36,3 @@ def scrape_image(url: str) -> str:
         print("No se encontró la imagen.")
 
     driver.quit()
-
-scrape_image("")
