@@ -9,13 +9,11 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 @app.post("/upload/")
 async def upload_image(file: UploadFile = File(...)):
     try:
-        # Verifica que el archivo es una imagen JPG o JPEG
         if not file.filename.lower().endswith((".jpg", ".jpeg")):
             raise HTTPException(status_code=400, detail="Solo se permiten archivos JPG")
 
-        file_location = Path(UPLOAD_FOLDER) / file.filename
+        file_location = os.path.join(UPLOAD_FOLDER, file.filename)
 
-        # Guarda la imagen en el servidor
         with open(file_location, "wb") as f:
             f.write(await file.read())
 
