@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Path
 import os
 
 app = FastAPI()
@@ -8,12 +8,15 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 @app.post("/upload/")
 async def upload_image(file: UploadFile = File(...)):
-    file_location = f"{UPLOAD_FOLDER}/{file.filename}"
-    
+    if not file.filename.lower().endswith((".jpg", ".jpeg")):
+        return {"error": "Solo se permiten archivos JPG"}
+
+    file_location = Path(UPLOAD_FOLDER) / file.filename
+
     with open(file_location, "wb") as f:
         f.write(await file.read())
 
-    return {"url": f"https://tu-servidor.com/{file_location}"}
+    return {"url": f"https://tu-proyecto.railway.app/{file_location}"}
 
 @app.get("/") 
 def read_root():
